@@ -1,0 +1,296 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+ 
+<Widget>:
+    font_name: 'mplus-2c-regular.ttf'
+ 
+<Display>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: 1, None
+            height: '48dp'
+            Button:
+                text: 'メイン画面'
+                on_release:
+                    sm.transition = SlideTransition(direction='right')
+                    #sm.current = 'screen_one'
+                    sm.current = 'TextWidget'
+            Button:
+                text: 'AGI画面'
+                on_release:
+                    sm.transition = SlideTransition(direction='left')
+                    sm.current = 'Screen_AGI'
+            Button:
+                text: '起動遅延設定'
+                on_release:
+                    sm.transition = SlideTransition(direction='left')
+                    sm.current = 'Screen_One'
+            Button:
+                text: 'キッチンタイマ'
+                on_release:
+                    sm.transition = SlideTransition(direction='left')
+                    sm.current = 'Screen_KitchenTimer'
+ 
+        ScreenManager:
+            id: sm
+            TextWidget:
+            Screen_AGI:
+            Screen_One:
+            Screen_KitchenTimer:
+            #Screen_Two:
+            #TextWidget:
+############################################################################### 
+<Screen_One>:
+    name: 'Screen_One'
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        BoxLayout:
+            Label:
+                id: label1_1
+                font_name: './mplus-2c-regular.ttf'
+                #font_size: 58
+                font_size: 38
+                text: "起動遅延時間:"
+            Label:
+                id: label1_2
+                font_name: './mplus-2c-regular.ttf'
+                font_size:140 
+                text: root.stMin
+            Label:
+                id: label1_3
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 58
+                text: "分"
+        BoxLayout:
+            Label:
+                id: label1_4
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 38
+                #text: "設定温度:"
+            Label:
+                id: label1_5
+                font_name: './mplus-2c-regular.ttf'
+                font_size:140 
+                #text: root.temp_set
+            Label:
+                id: label1_6
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 58
+                #text: "℃"
+        BoxLayout:
+
+            Button:
+                id: buttonO0
+                font_name: './mplus-2c-regular.ttf'
+                text: "SET"
+                #text: root.text2
+                font_size: 50
+                #on_press: root.btcUP()
+
+            Button:
+                id: buttonO1
+                font_name: './mplus-2c-regular.ttf'
+                text: "UP"
+                #text: root.text2
+                font_size: 50
+                on_press: root.btcUP()
+
+            Button:
+                id: buttonO2
+                font_name: './mplus-2c-regular.ttf'
+                text: "DOWN"
+                #text: root.text3
+                font_size: 50
+                on_press: root.btcDOWN()
+
+ 
+#<Screen_Two>:
+<Screen_KitchenTimer>:
+    name: 'Screen_KitchenTimer'
+    BoxLayout:
+        orientation: 'vertical'
+        pos:root.pos
+        size: root.size
+
+        Label:
+            text: str(root.left_time)
+            font_size:277
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint:1.0, 0.3
+
+
+            Button:
+                text: '+10 sec'
+                font_size:45
+                #background_color: 0,0,1,1
+                on_press:root.on_command('+10 sec')
+                #text: '画面2(のボタン)'
+
+            Button:
+                text: 'Stop' if root.is_countdown else 'Start'
+                font_size:45
+                #background_color: 0,0,1,1
+                on_press:root.on_command('start/stop')
+                #text: '画面2(のボタン)'
+
+            Button:
+                text: 'Reset' 
+                font_size:45
+                on_press:root.on_command('reset')
+                #text: '画面2(のボタン)'
+
+<Screen_AGI>:
+    name: 'Screen_AGI'
+    #BoxLayout:
+    #    orientation:'horizontal'
+    #    CheckBox:
+    #        group: "gp01"
+    #        id: check_AAA 
+    #        on_active:
+    #Label:
+    #    text: "AAA"
+    #    halign:"left"
+    #    #color:root.black
+
+    BoxLayout:
+        orientation:'vertical'
+        size: root.size
+        BoxLayout:
+            #orientation:'vertical'
+            Label:
+                background_color: 1,0,0,1
+                id: labelf_1
+                font_name: './mplus-2c-regular.ttf'
+                font_size:58
+                text:"撹拌"
+            BoxLayout:
+                orientation:'horizontal'
+                #Label:
+                #    font_size:58
+                #    text:"連続"
+                #CheckBox:
+                ToggleButton:
+                    group:"g1"
+                    id: btn_f1
+                    font_name: './mplus-2c-regular.ttf'
+                    font_size:58
+                    text:"連続"
+
+                #Label:
+                #    font_size:58
+                #    text:"断続"
+                    #text:"連続"
+                #CheckBox:
+                ToggleButton:
+                    group:"g1"
+                    id: btn_f2
+                    font_name: './mplus-2c-regular.ttf'
+                    font_size:58
+                    text:"断続"
+            #Button:
+            #    id: btn_f1
+            #    font_name: './mplus-2c-regular.ttf'
+            #    font_size:58
+            #    text:"連続"
+            #Button:
+            #    id: btn_f2
+            #    font_name: './mplus-2c-regular.ttf'
+            #    font_size:58
+            #    text:"断続"
+        BoxLayout:
+            #orientation:'vertical'
+            background_color: 0,0,1,1
+            canvas.before:
+                Color:
+                    rgba:0,1,0,1
+            Label:
+                color: 0,0,1,1
+                id: labelf_2
+                font_name: './mplus-2c-regular.ttf'
+                font_size:58
+                text:"冷凍異常"
+            Button:
+                id: btn_f4
+                font_name: './mplus-2c-regular.ttf'
+                font_size:58
+                text:"ブザー解除"
+
+<TextWidget>:
+    name: 'TextWidget' 
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+        BoxLayout:
+            Label:
+                id: label1_1
+                font_name: './mplus-2c-regular.ttf'
+                #font_size: 58
+                font_size: 38
+                text: "現在温度:"
+            Label:
+                id: label1_2
+                font_name: './mplus-2c-regular.ttf'
+                font_size:140 
+                text: root.temp_now
+            Label:
+                id: label1_3
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 58
+                text: "℃"
+        BoxLayout:
+            Label:
+                id: label1_4
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 38
+                text: "設定温度:"
+            Label:
+                id: label1_5
+                font_name: './mplus-2c-regular.ttf'
+                font_size:140 
+                text: root.temp_set
+            Label:
+                id: label1_6
+                font_name: './mplus-2c-regular.ttf'
+                font_size: 58
+                text: "℃"
+
+        BoxLayout:
+           # ToggleButton:
+           #     id: button1
+           #     font_name: './mplus-2c-regular.ttf'
+           #     text: root.text4
+           #     font_size: 58
+           #     on_press: root.buttonClicked()
+
+            Button:
+                id: button2
+                font_name: './mplus-2c-regular.ttf'
+                text: "UP"
+                text: root.text2
+                font_size: 50
+                on_press: root.btc2()
+
+            Button:
+                id: button3
+                font_name: './mplus-2c-regular.ttf'
+                text: "DOWN"
+                text: root.text3
+                font_size: 50
+                on_press: root.btc3()
+
+
+<ToggleButton@ToggleButton>
+    background_color:(0,0,0,0)
+    background_normal:''
+    text_size: self.width, None
+    halign: 'center'
+    canvas.before:
+        Color:
+            rgba:(255/255,0/255,102/255,1) if self.state=='down' else (48/255,84/255,150/255,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
